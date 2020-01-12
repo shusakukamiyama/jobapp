@@ -1,6 +1,6 @@
 import firebase from 'firebase';
 
-export const appInitilize = () => {
+export const appInitilize = async () => {
     const firebaseConfig = {
         apiKey: 'AIzaSyBsSfcbEkOo64Z4Ay0BZHPer2tMZdcpCP4',
         authDomain: 'jobapp-dev.firebaseapp.com',
@@ -11,5 +11,5 @@ export const appInitilize = () => {
         appId: '1:134062550540:web:e334b434fb4a3693c20829'
     };
 
-    firebase.initializeApp(firebaseConfig);
+    await firebase.initializeApp(firebaseConfig);
 };
