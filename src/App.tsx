@@ -8,7 +8,7 @@ export default class App extends React.Component<{}> {
         //アプリケーションの初期化
         appInitilize();
     }
-
+    
     public fetchPosts = () => {
         const db = firebase.firestore();
         db.collection('posts')
