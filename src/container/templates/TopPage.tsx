@@ -1,13 +1,11 @@
 import React from 'react';
 import Post from '../../define/model/post/Post';
 import GetPostsTaskFactory from '../../lib/task/posts/GetPostsTask';
-import Card from '@material-ui/core/Card';
-import { CardContent, Typography } from '@material-ui/core';
 import CreatePostTaskFactory from '../../lib/task/posts/CreatePostTask';
 import TextField from '@material-ui/core/TextField';
 import { Button } from '@material-ui/core';
-import PostTile from '../../component/post/PostTile';
 import PostTileList from '../../component/post/PostTileList';
+import Header from '../../component/Header';
 
 type Props = {};
 
@@ -33,7 +31,6 @@ export default class TopPage extends React.Component<Props, State> {
         GetPostsTaskFactory.create()
             .execute()
             .then(posts => {
-                console.log(posts);
                 this.setState({
                     posts
                 });
@@ -46,7 +43,8 @@ export default class TopPage extends React.Component<Props, State> {
 
     public render() {
         return (
-            <div className='App'>
+            <div>
+                <Header />
                 <h1>理系就活口コミサイト</h1>
                 <PostTileList posts={this.state.posts} />
                 <TextField
