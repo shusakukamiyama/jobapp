@@ -6,6 +6,7 @@ import { CardContent, Typography } from '@material-ui/core';
 import CreatePostTaskFactory from '../../lib/task/posts/CreatePostTask';
 import TextField from '@material-ui/core/TextField';
 import { Button } from '@material-ui/core';
+import PostTile from '../../component/post/PostTile';
 
 type Props = {};
 
@@ -43,15 +44,7 @@ export default class TopPage extends React.Component<Props, State> {
     };
 
     private renderPosts = () => {
-        const postCards = this.state.posts.map(post => (
-            <Card style={{ margin: 10, backgroundColor: 'blue' }} onClick={() => alert('aaa')}>
-                <CardContent>
-                    <Typography variant='body2' color='textSecondary' component='p'>
-                        {post.title}
-                    </Typography>
-                </CardContent>
-            </Card>
-        ));
+        const postCards = this.state.posts.map(post => <PostTile post={post} />);
         return postCards;
     };
 
@@ -60,8 +53,15 @@ export default class TopPage extends React.Component<Props, State> {
             <div className='App'>
                 <h1>理系就活口コミサイト</h1>
                 {this.renderPosts()}
-                <TextField id='standard-basic' label='タイトル' onChange={event => this.setState({ title: event.target.value })} value={this.state.title}/>
-                <Button color='primary' variant='outlined' onClick={() => this.createPost(this.state.title, "test")}>送信</Button>
+                <TextField
+                    id='standard-basic'
+                    label='タイトル'
+                    onChange={event => this.setState({ title: event.target.value })}
+                    value={this.state.title}
+                />
+                <Button color='primary' variant='outlined' onClick={() => this.createPost(this.state.title, 'test')}>
+                    送信
+                </Button>
             </div>
         );
     }
