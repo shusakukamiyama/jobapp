@@ -35,7 +35,7 @@ export default class TopPage extends React.Component<Props, State> {
     };
 
     private createPost = () => {
-        CreatePostTaskFactory.create().execute();
+        CreatePostTaskFactory.create('bbc', 'bbb').execute();
     };
 
     private renderPosts = () => {
