@@ -7,6 +7,7 @@ import CreatePostTaskFactory from '../../lib/task/posts/CreatePostTask';
 import TextField from '@material-ui/core/TextField';
 import { Button } from '@material-ui/core';
 import PostTile from '../../component/post/PostTile';
+import PostTileList from '../../component/post/PostTileList';
 
 type Props = {};
 
@@ -43,16 +44,11 @@ export default class TopPage extends React.Component<Props, State> {
         CreatePostTaskFactory.create(title, content).execute();
     };
 
-    private renderPosts = () => {
-        const postCards = this.state.posts.map(post => <PostTile post={post} />);
-        return postCards;
-    };
-
     public render() {
         return (
             <div className='App'>
                 <h1>理系就活口コミサイト</h1>
-                {this.renderPosts()}
+                <PostTileList posts={this.state.posts} />
                 <TextField
                     id='standard-basic'
                     label='タイトル'
