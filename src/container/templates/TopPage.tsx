@@ -4,18 +4,22 @@ import GetPostsTaskFactory from '../../lib/task/posts/GetPostsTask';
 import Card from '@material-ui/core/Card';
 import { CardContent, Typography } from '@material-ui/core';
 import CreatePostTaskFactory from '../../lib/task/posts/CreatePostTask';
+import TextField from '@material-ui/core/TextField';
+import { Button } from '@material-ui/core';
 
 type Props = {};
 
 type State = {
     posts: Post[];
+    title: string;
 };
 
 export default class TopPage extends React.Component<Props, State> {
     public constructor(props: Props, state: State) {
         super(props, state);
         this.state = {
-            posts: []
+            posts: [],
+            title: ''
         };
     }
 
@@ -34,8 +38,8 @@ export default class TopPage extends React.Component<Props, State> {
             });
     };
 
-    private createPost = () => {
-        CreatePostTaskFactory.create('bbc', 'bbb').execute();
+    private createPost = (title: string, content: string) => {
+        CreatePostTaskFactory.create(title, content).execute();
     };
 
     private renderPosts = () => {
@@ -56,7 +60,8 @@ export default class TopPage extends React.Component<Props, State> {
             <div className='App'>
                 <h1>理系就活口コミサイト</h1>
                 {this.renderPosts()}
-                <button onClick={() => this.createPost()}>投稿作成ボタン</button>
+                <TextField id='standard-basic' label='タイトル' onChange={event => this.setState({ title: event.target.value })} value={this.state.title}/>
+                <Button color='primary' variant='outlined' onClick={() => this.createPost(this.state.title, "test")}>送信</Button>
             </div>
         );
     }
