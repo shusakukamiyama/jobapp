@@ -43,10 +43,10 @@ export default class PostTile extends React.Component<Props> {
                     </CardActionArea>
                     <CardActions>
                         <Button size='small' color='primary'>
-                            Share
+                            シェア
                         </Button>
                         <Button size='small' color='primary'>
-                            Learn More
+                            もっと見る
                         </Button>
                     </CardActions>
                 </Card>

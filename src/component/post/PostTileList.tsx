@@ -19,7 +19,7 @@ export default class PostTileList extends React.Component<Props> {
     public render() {
         return (
             <div>
-                <h2>企業一覧</h2>
+                <h2>投稿一覧</h2>
                 <Grid container direction='row'>
                     {this.renderPostTileList()}
                 </Grid>
