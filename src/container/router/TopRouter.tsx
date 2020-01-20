@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import TopPage from './../templates/TopPage';
 import SignupPage from './../templates/SignupPage';
 
-const Router = () => {
+const TopRouter = () => {
     return (
         <BrowserRouter>
             <Switch>
@@ -15,4 +15,4 @@ const Router = () => {
     );
 };
 
-export default Router;
+export default TopRouter;

@@ -1,10 +1,5 @@
 import React from 'react';
 import Post from '../../define/model/post/Post';
-import GetPostsTaskFactory from '../../lib/task/posts/GetPostsTask';
-import CreatePostTaskFactory from '../../lib/task/posts/CreatePostTask';
-import TextField from '@material-ui/core/TextField';
-import { Button } from '@material-ui/core';
-import PostTileList from '../../component/post/PostTileList';
 import Header from '../../component/Header';
 import { Container } from '@material-ui/core';
 import CreateUserTaskFactory from '../../lib/task/users/CreateUserTask';
