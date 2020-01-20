@@ -1,9 +1,6 @@
 import React from 'react';
 import Post from '../../define/model/post/Post';
-import Header from '../../component/Header';
 import { Container } from '@material-ui/core';
-import CreateUserTaskFactory from '../../lib/task/users/CreateUserTask';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 type Props = {};
 
@@ -27,20 +24,14 @@ export default class SignupPage extends React.Component<Props, State> {
         };
     }
 
-    public componentDidMount() {
-        
-    }
-
+    public componentDidMount() {}
 
     public render() {
         return (
             <div>
-                <Header />
-                <Router>
-                    <Container>
-                        <h1>サインイン</h1>
-                    </Container>
-                </Router>
+                <Container>
+                    <h1>サインイン</h1>
+                </Container>
             </div>
         );
     }

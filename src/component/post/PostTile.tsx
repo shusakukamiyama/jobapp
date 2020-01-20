@@ -8,6 +8,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { Grid } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 
 type Props = {
     post: Post;
@@ -45,9 +46,11 @@ export default class PostTile extends React.Component<Props> {
                         <Button size='small' color='primary'>
                             シェア
                         </Button>
-                        <Button size='small' color='primary'>
-                            もっと見る
-                        </Button>
+                        <Link to='/signup'>
+                            <Button size='small' color='primary'>
+                                もっと見る
+                            </Button>
+                        </Link>
                     </CardActions>
                 </Card>
             </Grid>
