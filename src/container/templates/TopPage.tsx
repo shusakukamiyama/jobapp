@@ -5,13 +5,11 @@ import CreatePostTaskFactory from '../../lib/task/posts/CreatePostTask';
 import TextField from '@material-ui/core/TextField';
 import { Button } from '@material-ui/core';
 import PostTileList from '../../component/post/PostTileList';
-import Header from '../../component/Header';
 import { Container } from '@material-ui/core';
 import CreateUserTaskFactory from '../../lib/task/users/CreateUserTask';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import SignupPage from './SignupPage';
+import { RouteComponentProps } from 'react-router-dom';
 
-type Props = {};
+interface Props extends RouteComponentProps<{}> {}
 
 type State = {
     posts: Post[];
@@ -45,6 +43,10 @@ export default class TopPage extends React.Component<Props, State> {
                     posts
                 });
             });
+    };
+
+    private onPostTilePress = (post: Post) => {
+        this.props.history.push('/detail', { post: post });
     };
 
     private createPost = (title: string, content: string) => {
@@ -98,7 +100,7 @@ export default class TopPage extends React.Component<Props, State> {
                     >
                         送信
                     </Button>
-                    <PostTileList posts={this.state.posts} />
+                    <PostTileList posts={this.state.posts} onPostTilePress={this.onPostTilePress} />
                 </Container>
             </div>
         );
