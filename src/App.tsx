@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import { appInitilize } from './lib/firebase/initialize/AppInitialize';
 import TopPage from './container/templates/TopPage';
+import Router from './container/router/Router';
 
 type State = {
     isInitialized: boolean;
@@ -29,6 +30,6 @@ export default class App extends React.Component<{}, State> {
     public render() {
         if (!this.state.isInitialized) return null;
 
-        return <TopPage />;
+        return <Router />;
     }
 }
