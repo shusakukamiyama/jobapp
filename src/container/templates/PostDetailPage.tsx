@@ -26,6 +26,10 @@ class PostDetailPage extends React.Component<Props, State> {
     }
     
     public componentDidMount() {
+        this.onRefresh();
+    }
+
+    private onRefresh = () => {
         this.fetchPost();
         this.fetchComments();
     }
@@ -51,6 +55,7 @@ class PostDetailPage extends React.Component<Props, State> {
     private sendComment = () => {
         const { content } = this.state;
         CreateCommentTaskFactory.create( content, this.state.post && this.state.post.id).execute();
+        this.onRefresh();
     }
 
     public render() {
@@ -58,12 +63,12 @@ class PostDetailPage extends React.Component<Props, State> {
         return(
             <div>
                 <Container>
-                    <h1>投稿の詳細</h1>
+                    <h1>詳細</h1>
                     <p>{post?.title}</p>
                     <p>{post?.content}</p>
                     {comments.map((comment) => (<p>{comment.content}</p>))}
                     <TextField onChange={(event) => this.setState({ content: event.target.value })} value={content} />
-                    <Button onClick={() => this.sendComment()}>コメントを作成する</Button>
+                    <Button onClick={() => this.sendComment()}>コメントを作成</Button>
                 </Container>
             </div>
         )
