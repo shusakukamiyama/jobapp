@@ -45,10 +45,6 @@ export default class TopPage extends React.Component<Props, State> {
             });
     };
 
-    private onPostTilePress = (post: Post) => {
-        this.props.history.push({ pathname: '/detail', state: { post: post } });
-    };
-
     private createPost = (title: string, content: string) => {
         CreatePostTaskFactory.create(title, content).execute();
     };
@@ -100,7 +96,7 @@ export default class TopPage extends React.Component<Props, State> {
                     >
                         送信
                     </Button>
-                    <PostTileList posts={this.state.posts} onPostTilePress={this.onPostTilePress} />
+                    <PostTileList posts={this.state.posts} />
                 </Container>
             </div>
         );

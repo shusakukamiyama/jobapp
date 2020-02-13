@@ -1,44 +1,46 @@
 import React from 'react';
 import Post from '../../define/model/post/Post';
 import { Container } from '@material-ui/core';
-import { RouteComponentProps } from 'react-router-dom';
+import { RouteComponentProps, withRouter } from 'react-router-dom';
+import GetPostTaskFactory from '../../lib/task/posts/GetPostTask';
 
-interface Props extends RouteComponentProps<{}> {
-    post: Post;
-}
+type Props = {post: Post} & RouteComponentProps<{ id: string }>;
 
 type State = {
-    posts: Post[];
-    title: string;
-    content: string;
-    email: string;
-    password: string;
+    post: Post | null;
 };
 
-export default class PostDetailPage extends React.Component<Props, State> {
-    public constructor(props: Props, state: State) {
-        super(props, state);
+class PostDetailPage extends React.Component<Props, State> {
+    public constructor(props: Props) {
+        super(props);
         this.state = {
-            posts: [],
-            title: '',
-            content: '',
-            email: '',
-            password: ''
-        };
+            post: null,
+        }
+    }
+    
+    public componentDidMount() {
+        this.fetchPost();
     }
 
-    public componentDidMount() {}
+    private fetchPost = () => {
+        const { id } = this.props.match.params;
+        GetPostTaskFactory.create(id).execute()
+            .then((post) => {
+                this.setState({ post: post });
+            });
+    }
 
     public render() {
-        //適切な型の指定の方法がわからないため一旦これで実装
-        const state: any = this.props.location.state;
-        return (
+        const { post } = this.state;
+        return(
             <div>
                 <Container>
                     <h1>投稿の詳細</h1>
-                    <p>{state.post.title}</p>
+                    <p>{post?.title}</p>
                 </Container>
             </div>
-        );
+        )
     }
 }
+
+export default withRouter(PostDetailPage);

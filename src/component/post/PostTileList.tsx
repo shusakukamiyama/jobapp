@@ -5,7 +5,6 @@ import { Grid } from '@material-ui/core';
 
 type Props = {
     posts: Post[];
-    onPostTilePress: (post: Post) => void;
 }
 
 export default class PostTileList extends React.Component<Props> {
@@ -15,7 +14,7 @@ export default class PostTileList extends React.Component<Props> {
 
     private renderPostTileList = () => {
         return this.props.posts.map(post => (
-            <PostTile key={post.id} post={post} onPostTilePress={this.props.onPostTilePress} />
+            <PostTile key={post.id} post={post} />
         ));
     };
 
