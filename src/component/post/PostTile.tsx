@@ -20,13 +20,13 @@ export const PostTile = ({post} : Props) => {
             <Link to={`/posts/${post.id}`}>
                 <Card>
                     <CardActionArea>
-                        <CardMedia
+                        {/* <CardMedia
                             component='img'
                             alt='Contemplative Reptile'
                             height='140'
                             image={require('../../static/images/startup-594091_1920.jpg')}
                             title='Contemplative Reptile'
-                        />
+                        /> */}
                         <CardContent>
                             <Typography gutterBottom variant='h5' component='h2'>
                                 {post.title}

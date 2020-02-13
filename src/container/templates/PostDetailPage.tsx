@@ -1,8 +1,9 @@
 import React from 'react';
 import Post from '../../define/model/post/Post';
-import { Container } from '@material-ui/core';
+import { Container, Button } from '@material-ui/core';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import GetPostTaskFactory from '../../lib/task/posts/GetPostTask';
+import CreateCommentTaskFactory from '../../lib/task/comments/CreateCommentTask';
 
 type Props = {post: Post} & RouteComponentProps<{ id: string }>;
 
@@ -30,6 +31,10 @@ class PostDetailPage extends React.Component<Props, State> {
             });
     }
 
+    private sendComment = () => {
+        CreateCommentTaskFactory.create('テスト', this.state.post && this.state.post.id).execute()
+    }
+
     public render() {
         const { post } = this.state;
         return(
@@ -37,6 +42,8 @@ class PostDetailPage extends React.Component<Props, State> {
                 <Container>
                     <h1>投稿の詳細</h1>
                     <p>{post?.title}</p>
+                    <p>{post?.content}</p>
+                    <Button onClick={() => this.sendComment()}>コメントを作成する</Button>
                 </Container>
             </div>
         )
