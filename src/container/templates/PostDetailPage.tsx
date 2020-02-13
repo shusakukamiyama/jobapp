@@ -6,6 +6,7 @@ import { RouteComponentProps, withRouter } from 'react-router-dom';
 import GetPostTaskFactory from '../../lib/task/posts/GetPostTask';
 import CreateCommentTaskFactory from '../../lib/task/comments/CreateCommentTask';
 import GetCommentsTaskFactory from '../../lib/task/comments/GetCommentsTask';
+import { CommentTile } from '../../component/comment/CommentTile';
 
 type Props = {post: Post} & RouteComponentProps<{ id: string }>;
 
@@ -66,7 +67,7 @@ class PostDetailPage extends React.Component<Props, State> {
                     <h1>詳細</h1>
                     <p>{post?.title}</p>
                     <p>{post?.content}</p>
-                    {comments.map((comment) => (<p>{comment.content}</p>))}
+                    {comments.map((comment) => <CommentTile content={comment.content} />)}
                     <TextField onChange={(event) => this.setState({ content: event.target.value })} value={content} />
                     <Button onClick={() => this.sendComment()}>コメントを作成</Button>
                 </Container>
