@@ -6,6 +6,7 @@ export default class CommentFactory {
             id,
             data.content,
             data.targetId,
+            new Date(data.createdAt * 1000),
         )
     }
 }

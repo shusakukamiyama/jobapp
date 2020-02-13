@@ -1,6 +1,7 @@
 export type CommentData = {
     content: string;
     targetId: string;
+    createdAt: number;
 }
 
 export default class Comment {
@@ -8,5 +9,6 @@ export default class Comment {
         public readonly id: string,
         public readonly content: string,
         public readonly targetId: string,
+        public readonly createdAt: Date,
     ){}
 }

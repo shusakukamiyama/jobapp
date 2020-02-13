@@ -16,6 +16,7 @@ export class GetCommentsTask {
         try {
             const snapshot = await db.collection('comments')
                 .where('targetId', '==', this.targetId)
+                .orderBy('createdAt', 'desc')
                 .get();
             const comments: Comment[] = [];
             snapshot.forEach(row => {
@@ -25,6 +26,7 @@ export class GetCommentsTask {
             return comments;
         }
         catch (err) {
+            console.log(err);
             return err;
         }
     }

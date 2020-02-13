@@ -13,7 +13,8 @@ export class CreateCommentTask {
         const db = firebase.firestore();
         db.collection('comments').add({
             content: this.content,
-            targetId: this.targetId
+            targetId: this.targetId,
+            createdAt: Math.floor(new Date().getTime() / 1000)
         });
     }
 }

@@ -67,7 +67,7 @@ class PostDetailPage extends React.Component<Props, State> {
                     <h1>詳細</h1>
                     <p>{post?.title}</p>
                     <p>{post?.content}</p>
-                    {comments.map((comment) => <CommentTile content={comment.content} />)}
+                    {comments.map((comment) => <CommentTile comment={comment} />)}
                     <TextField onChange={(event) => this.setState({ content: event.target.value })} value={content} />
                     <Button onClick={() => this.sendComment()}>コメントを作成</Button>
                 </Container>

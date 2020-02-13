@@ -5,9 +5,10 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import Comment from '../../define/model/comment/Comment';
 
 type Props = {
-    content: string;
+    comment: Comment;
 }
 
 const useStyles = makeStyles({
@@ -27,14 +28,17 @@ const useStyles = makeStyles({
     },
 });
 
-export const CommentTile = ({content} : Props) => {
+export const CommentTile = ({comment} : Props) => {
     const classes = useStyles();
 
     return (
         <Card className={classes.root}>
         <CardContent>
             <Typography variant="body2" component="p">
-            {content}
+                {comment.content}
+            </Typography>
+            <Typography variant="body2" component="p">
+                {comment.createdAt.toLocaleTimeString()}
             </Typography>
         </CardContent>
         <CardActions>
