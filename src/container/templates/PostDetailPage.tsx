@@ -1,48 +1,64 @@
 import React from 'react';
 import Post from '../../define/model/post/Post';
+import Comment from '../../define/model/comment/Comment';
 import { Container, Button } from '@material-ui/core';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import GetPostTaskFactory from '../../lib/task/posts/GetPostTask';
 import CreateCommentTaskFactory from '../../lib/task/comments/CreateCommentTask';
+import GetCommentsTaskFactory from '../../lib/task/comments/GetCommentsTask';
 
 type Props = {post: Post} & RouteComponentProps<{ id: string }>;
 
 type State = {
     post: Post | null;
+    comments: Comment[];
 };
 
 class PostDetailPage extends React.Component<Props, State> {
-    public constructor(props: Props) {
-        super(props);
+    public constructor(props: Props, state: State) {
+        super(props, state);
         this.state = {
             post: null,
+            comments: [],
         }
     }
     
     public componentDidMount() {
         this.fetchPost();
+        this.fetchComments();
     }
 
     private fetchPost = () => {
         const { id } = this.props.match.params;
         GetPostTaskFactory.create(id).execute()
             .then((post) => {
-                this.setState({ post: post });
+                if (!post) return;
+                this.setState({ post });
+            });
+    }
+
+    private fetchComments = () => {
+        const { id } = this.props.match.params;
+        GetCommentsTaskFactory.create(id).execute()
+            .then((comments) => {
+                if(comments.length === 0) return;
+                this.setState({ comments });
             });
     }
 
     private sendComment = () => {
-        CreateCommentTaskFactory.create('テスト', this.state.post && this.state.post.id).execute()
+        CreateCommentTaskFactory.create('テスト', this.state.post && this.state.post.id).execute();
     }
 
     public render() {
-        const { post } = this.state;
+        const { post, comments } = this.state;
         return(
             <div>
                 <Container>
                     <h1>投稿の詳細</h1>
                     <p>{post?.title}</p>
                     <p>{post?.content}</p>
+                    {comments.map((comment) => (<p>{comment.content}</p>))}
                     <Button onClick={() => this.sendComment()}>コメントを作成する</Button>
                 </Container>
             </div>

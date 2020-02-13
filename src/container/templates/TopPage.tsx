@@ -39,6 +39,7 @@ export default class TopPage extends React.Component<Props, State> {
         GetPostsTaskFactory.create()
             .execute()
             .then(posts => {
+                if (posts.length === 0) return;
                 this.setState({
                     posts
                 });

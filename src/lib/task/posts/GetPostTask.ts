@@ -11,17 +11,17 @@ export default class GetPostTaskFactory {
 export class GetPostTask {
     public constructor (public readonly postId: string){};
 
-    public execute(): Promise<Post> {
+    public async execute(): Promise<Post> {
         const db = firebase.firestore();
-        return db.collection('posts')
-            .doc(this.postId)
-            .get()
-            .then((row : any) => {
-                const post = PostFactory.create(row.id, row.data() as PostData);
-                return post;
-            })
-            .catch(err => {
-                return err
-            });
+        try {
+            const row = await db.collection('posts')
+                .doc(this.postId)
+                .get();
+            const post = PostFactory.create(row.id, (row.data() as PostData));
+            return post;
+        }
+        catch (err) {
+            return err;
+        }
     }
 }
