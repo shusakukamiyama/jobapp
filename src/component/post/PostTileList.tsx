@@ -1,6 +1,6 @@
 import React from 'react';
 import Post from '../../define/model/post/Post';
-import PostTile from './PostTile';
+import { PostTile } from './PostTile';
 import { Grid } from '@material-ui/core';
 
 type Props = {

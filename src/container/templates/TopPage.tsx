@@ -46,7 +46,7 @@ export default class TopPage extends React.Component<Props, State> {
     };
 
     private onPostTilePress = (post: Post) => {
-        this.props.history.push('/detail', { post: post });
+        this.props.history.push({ pathname: '/detail', state: { post: post } });
     };
 
     private createPost = (title: string, content: string) => {

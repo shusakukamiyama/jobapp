@@ -3,7 +3,9 @@ import Post from '../../define/model/post/Post';
 import { Container } from '@material-ui/core';
 import { RouteComponentProps } from 'react-router-dom';
 
-interface Props extends RouteComponentProps<{}> {}
+interface Props extends RouteComponentProps<{}> {
+    post: Post;
+}
 
 type State = {
     posts: Post[];
@@ -28,6 +30,7 @@ export default class PostDetailPage extends React.Component<Props, State> {
     public componentDidMount() {}
 
     public render() {
+        //適切な型の指定の方法がわからないため一旦これで実装
         const state: any = this.props.location.state;
         return (
             <div>

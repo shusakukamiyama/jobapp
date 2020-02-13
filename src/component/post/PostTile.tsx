@@ -14,41 +14,33 @@ type Props = {
     onPostTilePress: (post: Post) => void;
 };
 
-export default class PostTile extends React.Component<Props> {
-    public constructor(props: Props) {
-        super(props);
-    }
-
-    public render() {
-        const { post } = this.props;
-
-        return (
-            <Grid item xs={3} sm={3}>
-                <Card onClick={() => this.props.onPostTilePress(post)}>
-                    <CardActionArea>
-                        <CardMedia
-                            component='img'
-                            alt='Contemplative Reptile'
-                            height='140'
-                            image={require('../../static/images/startup-594091_1920.jpg')}
-                            title='Contemplative Reptile'
-                        />
-                        <CardContent>
-                            <Typography gutterBottom variant='h5' component='h2'>
-                                {post.title}
-                            </Typography>
-                            <Typography variant='body2' color='textSecondary' component='p'>
-                                {post.content}
-                            </Typography>
-                        </CardContent>
-                    </CardActionArea>
-                    <CardActions>
-                        <Button size='small' color='primary'>
-                            シェア
-                        </Button>
-                    </CardActions>
-                </Card>
-            </Grid>
-        );
-    }
+export const PostTile = ({post, onPostTilePress} : Props) => {
+    return (
+        <Grid item xs={3} sm={3}>
+            <Card onClick={() => onPostTilePress(post)}>
+                <CardActionArea>
+                    <CardMedia
+                        component='img'
+                        alt='Contemplative Reptile'
+                        height='140'
+                        image={require('../../static/images/startup-594091_1920.jpg')}
+                        title='Contemplative Reptile'
+                    />
+                    <CardContent>
+                        <Typography gutterBottom variant='h5' component='h2'>
+                            {post.title}
+                        </Typography>
+                        <Typography variant='body2' color='textSecondary' component='p'>
+                            {post.content}
+                        </Typography>
+                    </CardContent>
+                </CardActionArea>
+                <CardActions>
+                    <Button size='small' color='primary'>
+                        シェア
+                    </Button>
+                </CardActions>
+            </Card>
+        </Grid>
+    );
 }
