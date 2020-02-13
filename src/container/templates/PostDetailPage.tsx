@@ -1,7 +1,7 @@
 import React from 'react';
 import Post from '../../define/model/post/Post';
 import Comment from '../../define/model/comment/Comment';
-import { Container, Button } from '@material-ui/core';
+import { Container, Button, TextField } from '@material-ui/core';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import GetPostTaskFactory from '../../lib/task/posts/GetPostTask';
 import CreateCommentTaskFactory from '../../lib/task/comments/CreateCommentTask';
@@ -12,6 +12,7 @@ type Props = {post: Post} & RouteComponentProps<{ id: string }>;
 type State = {
     post: Post | null;
     comments: Comment[];
+    content: string,
 };
 
 class PostDetailPage extends React.Component<Props, State> {
@@ -20,6 +21,7 @@ class PostDetailPage extends React.Component<Props, State> {
         this.state = {
             post: null,
             comments: [],
+            content: '',
         }
     }
     
@@ -47,11 +49,12 @@ class PostDetailPage extends React.Component<Props, State> {
     }
 
     private sendComment = () => {
-        CreateCommentTaskFactory.create('テスト', this.state.post && this.state.post.id).execute();
+        const { content } = this.state;
+        CreateCommentTaskFactory.create( content, this.state.post && this.state.post.id).execute();
     }
 
     public render() {
-        const { post, comments } = this.state;
+        const { post, comments, content } = this.state;
         return(
             <div>
                 <Container>
@@ -59,6 +62,7 @@ class PostDetailPage extends React.Component<Props, State> {
                     <p>{post?.title}</p>
                     <p>{post?.content}</p>
                     {comments.map((comment) => (<p>{comment.content}</p>))}
+                    <TextField onChange={(event) => this.setState({ content: event.target.value })} value={content} />
                     <Button onClick={() => this.sendComment()}>コメントを作成する</Button>
                 </Container>
             </div>
