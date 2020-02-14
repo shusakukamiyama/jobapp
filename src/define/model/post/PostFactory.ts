@@ -6,7 +6,7 @@ export default class PostFactory {
             id,
             data.title,
             data.content,
-            new Date(data.createdAt * 1000),
-        )
+            new Date(data.createdAt * 1000)
+        );
     }
 }

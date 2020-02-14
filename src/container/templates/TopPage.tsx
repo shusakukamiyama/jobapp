@@ -1,15 +1,15 @@
 import React from 'react';
+import { RouteComponentProps } from 'react-router-dom';
+import TextField from '@material-ui/core/TextField';
+import { Button } from '@material-ui/core';
+import { Container } from '@material-ui/core';
 import Post from '../../define/model/post/Post';
 import GetPostsTaskFactory from '../../lib/task/posts/GetPostsTask';
 import CreatePostTaskFactory from '../../lib/task/posts/CreatePostTask';
-import TextField from '@material-ui/core/TextField';
-import { Button } from '@material-ui/core';
 import PostTileList from '../../component/post/PostTileList';
-import { Container } from '@material-ui/core';
 import CreateUserTaskFactory from '../../lib/task/users/CreateUserTask';
-import { RouteComponentProps } from 'react-router-dom';
 
-interface Props extends RouteComponentProps<{}> {}
+type Props = RouteComponentProps<{}>;
 
 type State = {
     posts: Post[];
