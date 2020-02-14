@@ -1,6 +1,6 @@
-import firebase from 'firebase';
 import UserFactory from '../../../define/model/user/UserFactory';
 import UserData from '../../../define/model/user/User';
+import Firebase from '../../firebase/Firebase';
 
 export default class GetUserTaskFactory {
     public static create(userId : string | null) {
@@ -13,7 +13,7 @@ export class GetUserTask {
 
     public execute() {
         if (this.userId) {
-        return firebase.firestore().collection('users')
+        return  Firebase.getInstance().load('users')
             .doc(this.userId)
             .get()
             .then((doc) => {

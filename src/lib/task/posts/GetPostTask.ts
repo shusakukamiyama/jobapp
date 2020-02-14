@@ -1,6 +1,6 @@
-import firebase from 'firebase';
 import PostFactory from '../../../define/model/post/PostFactory';
 import Post, { PostData } from '../../../define/model/post/Post';
+import Firebase from '../../firebase/Firebase';
 
 export default class GetPostTaskFactory {
     public static create(postId: string) {
@@ -12,9 +12,8 @@ export class GetPostTask {
     public constructor (public readonly postId: string){};
 
     public async execute(): Promise<Post> {
-        const db = firebase.firestore();
         try {
-            const row = await db.collection('posts')
+            const row = await Firebase.getInstance().load('posts')
                 .doc(this.postId)
                 .get();
             const post = PostFactory.create(row.id, (row.data() as PostData));

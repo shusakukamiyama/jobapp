@@ -1,5 +1,6 @@
 import firebase from 'firebase';
 import SaveData from '../../storage/SaveData';
+import Firebase from '../../firebase/Firebase';
 
 export default class CreateUserTaskFactory {
     public static create(email: string, password: string) {
@@ -11,9 +12,7 @@ export class CreateUserTask {
     constructor(private readonly email: string, private readonly password: string) {}
 
     public execute() {
-        firebase
-            .auth()
-            .createUserWithEmailAndPassword(this.email, this.password)
+        Firebase.getInstance().createUserWithEmailAndPassword(this.email, this.password)
             .then(async (user) => { 
                 if (!user) return;
 

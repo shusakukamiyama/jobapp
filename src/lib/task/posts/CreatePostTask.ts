@@ -1,4 +1,4 @@
-import firebase from 'firebase';
+import Firebase from '../../firebase/Firebase';
 
 export default class CreatePostTaskFactory {
     public static create(title: string, content: string) {
@@ -10,8 +10,7 @@ export class CreatePostTask {
     constructor(private readonly title: string, private readonly content: string) {}
 
     public execute() {
-        const db = firebase.firestore();
-        db.collection('posts').add({
+        Firebase.getInstance().save('posts', {
             title: this.title,
             content: this.content
         });

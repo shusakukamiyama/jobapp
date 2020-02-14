@@ -1,6 +1,6 @@
-import firebase from 'firebase';
 import CommentFactory from '../../../define/model/comment/CommentFactory';
 import Comment, { CommentData } from '../../../define/model/comment/Comment';
+import Firebase from '../../firebase/Firebase';
 
 export default class GetCommentsTaskFactory {
     public static create(targetId: string | null) {
@@ -12,9 +12,8 @@ export class GetCommentsTask {
     public constructor(private readonly targetId: string | null){}
 
     public async execute(): Promise<Comment[]> {
-        const db = firebase.firestore();
         try {
-            const snapshot = await db.collection('comments')
+            const snapshot = await Firebase.getInstance().load('comments')
                 .where('targetId', '==', this.targetId)
                 .orderBy('createdAt', 'desc')
                 .get();
