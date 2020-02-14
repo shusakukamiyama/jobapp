@@ -10,7 +10,7 @@ import User from '../define/model/user/User';
 
 type Props = {
     user?: User | null;
-}
+};
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -26,24 +26,20 @@ const useStyles = makeStyles((theme: Theme) =>
     })
 );
 
-export const Header: React.FC<Props> = (props) => {
+export const Header: React.FC<Props> = props => {
     const classes = useStyles();
 
     return (
         <div className={classes.root}>
             <AppBar position='static'>
                 <Toolbar>
-                    <IconButton edge='start' className={classes.menuButton} color='inherit' aria-label='menu'>
-                        
-                    </IconButton>
+                    <IconButton edge='start' className={classes.menuButton} color='inherit' aria-label='menu' />
                     <Typography variant='h6' className={classes.title}>
-                        <Link to="/">
-                            ロゴ
-                        </Link>
+                        <Link to='/'>ロゴ</Link>
                     </Typography>
-                    {props.user ? <Button color='inherit'>{props.user.name}</Button>: null}
+                    {props.user ? <Button color='inherit'>{props.user.name}</Button> : null}
                 </Toolbar>
             </AppBar>
         </div>
     );
-}
+};

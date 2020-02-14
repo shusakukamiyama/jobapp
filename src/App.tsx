@@ -33,15 +33,21 @@ export default class App extends React.Component<{}, State> {
         const KEY_USER_ID = 'userId';
         //ローカルストレージから値を取得
         const userId = SaveData.load(KEY_USER_ID);
-        GetUserTaskFactory.create(userId).execute()?.then(user => {
-            this.setState({ user })
-        });
+        GetUserTaskFactory.create(userId)
+            .execute()
+            ?.then(user => {
+                this.setState({ user });
+            });
     }
 
     public render() {
         const { user } = this.state;
         if (!this.state.isInitialized) return null;
 
-        return <BrowserRouter><TopRouter user={user}/></BrowserRouter>;
+        return (
+            <BrowserRouter>
+                <TopRouter user={user} />
+            </BrowserRouter>
+        );
     }
 }

@@ -31,6 +31,6 @@ export default class Firebase {
     }
 
     public createUserWithEmailAndPassword(email: string, password: string) {
-        return  this.auth.createUserWithEmailAndPassword(email, password)
+        return this.auth.createUserWithEmailAndPassword(email, password);
     }
 }

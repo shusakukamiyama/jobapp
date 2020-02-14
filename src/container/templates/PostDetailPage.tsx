@@ -8,12 +8,12 @@ import CreateCommentTaskFactory from '../../lib/task/comments/CreateCommentTask'
 import GetCommentsTaskFactory from '../../lib/task/comments/GetCommentsTask';
 import { CommentTile } from '../../component/comment/CommentTile';
 
-type Props = {post: Post} & RouteComponentProps<{ id: string }>;
+type Props = { post: Post } & RouteComponentProps<{ id: string }>;
 
 type State = {
     post: Post | null;
     comments: Comment[];
-    content: string,
+    content: string;
 };
 
 class PostDetailPage extends React.Component<Props, State> {
@@ -22,10 +22,10 @@ class PostDetailPage extends React.Component<Props, State> {
         this.state = {
             post: null,
             comments: [],
-            content: '',
-        }
+            content: ''
+        };
     }
-    
+
     public componentDidMount() {
         this.onRefresh();
     }
@@ -33,46 +33,50 @@ class PostDetailPage extends React.Component<Props, State> {
     private onRefresh = () => {
         this.fetchPost();
         this.fetchComments();
-    }
+    };
 
     private fetchPost = () => {
         const { id } = this.props.match.params;
-        GetPostTaskFactory.create(id).execute()
-            .then((post) => {
+        GetPostTaskFactory.create(id)
+            .execute()
+            .then(post => {
                 if (!post) return;
                 this.setState({ post });
             });
-    }
+    };
 
     private fetchComments = () => {
         const { id } = this.props.match.params;
-        GetCommentsTaskFactory.create(id).execute()
-            .then((comments) => {
-                if(comments.length === 0) return;
+        GetCommentsTaskFactory.create(id)
+            .execute()
+            .then(comments => {
+                if (comments.length === 0) return;
                 this.setState({ comments });
             });
-    }
+    };
 
     private sendComment = () => {
         const { content } = this.state;
-        CreateCommentTaskFactory.create( content, this.state.post && this.state.post.id).execute();
+        CreateCommentTaskFactory.create(content, this.state.post && this.state.post.id).execute();
         this.onRefresh();
-    }
+    };
 
     public render() {
         const { post, comments, content } = this.state;
-        return(
+        return (
             <div>
                 <Container>
                     <h1>詳細</h1>
                     <p>{post?.title}</p>
                     <p>{post?.content}</p>
-                    {comments.map((comment) => <CommentTile comment={comment} />)}
-                    <TextField onChange={(event) => this.setState({ content: event.target.value })} value={content} />
+                    {comments.map(comment => (
+                        <CommentTile comment={comment} />
+                    ))}
+                    <TextField onChange={event => this.setState({ content: event.target.value })} value={content} />
                     <Button onClick={() => this.sendComment()}>コメントを作成</Button>
                 </Container>
             </div>
-        )
+        );
     }
 }
 

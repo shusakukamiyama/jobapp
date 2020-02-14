@@ -12,13 +12,16 @@ export class CreateUserTask {
     constructor(private readonly email: string, private readonly password: string) {}
 
     public execute() {
-        Firebase.getInstance().createUserWithEmailAndPassword(this.email, this.password)
-            .then(async (user) => { 
+        Firebase.getInstance()
+            .createUserWithEmailAndPassword(this.email, this.password)
+            .then(async user => {
                 if (!user) return;
 
-                await firebase.firestore().collection('users')
+                await firebase
+                    .firestore()
+                    .collection('users')
                     .doc(user.user?.uid)
-                    .set({name: '', profile: ''})
+                    .set({ name: '', profile: '' });
 
                 const KEY_USER_ID = 'userId';
 
