@@ -5,7 +5,7 @@ export default class SaveData {
         return localStorage.getItem(key)
     }
 
-    public static save(key: string, value: string) {
-        return localStorage.setItem(key, value);
+    public static save(key: string, value: string | undefined) {
+        if (value) return localStorage.setItem(key, value);
     }
 }

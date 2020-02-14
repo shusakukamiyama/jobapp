@@ -74,7 +74,7 @@ export default class TopPage extends React.Component<Props, State> {
                     <Button
                         color='primary'
                         variant='outlined'
-                        onClick={() => this.createUser('test@gmail.com', 'testtest')}
+                        onClick={() => this.createUser('test3@gmail.com', 'testtest')}
                     >
                         サインアップ
                     </Button>

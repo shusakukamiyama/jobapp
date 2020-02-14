@@ -6,9 +6,10 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import { Link } from 'react-router-dom';
+import User from '../define/model/user/User';
 
 type Props = {
-    userId?: string | null;
+    user?: User | null;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -40,7 +41,7 @@ export const Header: React.FC<Props> = (props) => {
                             ロゴ
                         </Link>
                     </Typography>
-                    {props.userId ? <Button color='inherit'>ログイン</Button>: null}
+                    {props.user ? <Button color='inherit'>{props.user.name}</Button>: null}
                 </Toolbar>
             </AppBar>
         </div>

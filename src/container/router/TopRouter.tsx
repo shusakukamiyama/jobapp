@@ -4,15 +4,16 @@ import { Header } from './../../component/Header';
 import TopPage from './../templates/TopPage';
 import SignupPage from './../templates/SignupPage';
 import PostDetailPage from './../templates/PostDetailPage';
+import User from '../../define/model/user/User';
 
 type Props = {
-    userId?: string | null;
+    user?: User | null;
 }
 
 export const TopRouter: React.FC<Props> = (props) => {
     return (
         <div>
-            <Header userId={props.userId}/>
+            <Header user={props.user}/>
             <Switch>
                 <Route exact={true} path='/' component={TopPage} />
                 <Route path='/signup' component={SignupPage} />

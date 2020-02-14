@@ -4,10 +4,12 @@ import { appInitilize } from './lib/firebase/initialize/AppInitialize';
 import SaveData from './lib/storage/SaveData';
 import { TopRouter } from './container/router/TopRouter';
 import { BrowserRouter } from 'react-router-dom';
+import GetUserTaskFactory from './lib/task/users/GetUserTask';
+import User from './define/model/user/User';
 
 type State = {
     isInitialized: boolean;
-    userId?: string | null;
+    user?: User | null;
 };
 
 export default class App extends React.Component<{}, State> {
@@ -15,7 +17,7 @@ export default class App extends React.Component<{}, State> {
         super(props, state);
         this.state = {
             isInitialized: false,
-            userId: null
+            user: null
         };
     }
 
@@ -28,21 +30,18 @@ export default class App extends React.Component<{}, State> {
                     isInitialized: true
                 })
             );
-
         const KEY_USER_ID = 'userId';
-
-        //ローカルストレージに値を保存
-        SaveData.save(KEY_USER_ID, 'ttt');
-
         //ローカルストレージから値を取得
         const userId = SaveData.load(KEY_USER_ID);
-        this.setState({ userId: userId })
+        GetUserTaskFactory.create(userId).execute()?.then(user => {
+            this.setState({ user })
+        });
     }
 
     public render() {
-        const { userId } = this.state;
+        const { user } = this.state;
         if (!this.state.isInitialized) return null;
 
-        return <BrowserRouter><TopRouter userId={userId}/></BrowserRouter>;
+        return <BrowserRouter><TopRouter user={user}/></BrowserRouter>;
     }
 }
