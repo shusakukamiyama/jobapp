@@ -12,6 +12,14 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import Color from '../define/common/Color';
+
+type Props = {
+    email: string;
+    password: string;
+    onChangeEmail: (email: string) => void;
+    onChangePassword: (password: string) => void;
+}
 
 function Copyright() {
     return (
@@ -43,10 +51,12 @@ const useStyles = makeStyles(theme => ({
     },
     submit: {
         margin: theme.spacing(3, 0, 2),
+        backgroundColor: Color.lightGreen,
+        color: Color.white
     },
 }));
 
-export const SignUpPage = () => {
+export const SignIn: React.FC<Props> = (props) => {
     const classes = useStyles();
 
     return (
@@ -61,6 +71,8 @@ export const SignUpPage = () => {
             </Typography>
             <form className={classes.form} noValidate>
             <TextField
+                value={props.email}
+                onChange={(event) => props.onChangeEmail(event.target.value)}
                 variant="outlined"
                 margin="normal"
                 required
@@ -72,6 +84,8 @@ export const SignUpPage = () => {
                 autoFocus
             />
             <TextField
+                value={props.password}
+                onChange={(event) => props.onChangePassword(event.target.value)}
                 variant="outlined"
                 margin="normal"
                 required
@@ -83,14 +97,13 @@ export const SignUpPage = () => {
                 autoComplete="current-password"
             />
             <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
+                control={<Checkbox value="remember" style={{ color: "#3AD6B2" }} />}
                 label="入力内容を保存する"
             />
             <Button
                 type="submit"
                 fullWidth
                 variant="contained"
-                color="primary"
                 className={classes.submit}
             >
                 サインイン
@@ -102,9 +115,6 @@ export const SignUpPage = () => {
                 </Link>
                 </Grid>
                 <Grid item>
-                <Link href="#" variant="body2">
-                    {"ログインはこちら"}
-                </Link>
                 </Grid>
             </Grid>
             </form>

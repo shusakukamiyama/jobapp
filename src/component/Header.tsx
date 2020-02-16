@@ -15,13 +15,16 @@ type Props = {
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         root: {
-            flexGrow: 1
+            flexGrow: 1,
         },
         menuButton: {
             marginRight: theme.spacing(2)
         },
         title: {
             flexGrow: 1
+        },
+        all: {
+            backgroundColor: '#3AD6B2',
         }
     })
 );
@@ -31,7 +34,7 @@ export const Header: React.FC<Props> = props => {
 
     return (
         <div className={classes.root}>
-            <AppBar position='static'>
+            <AppBar position='static' className={classes.all}>
                 <Toolbar>
                     <IconButton edge='start' className={classes.menuButton} color='inherit' aria-label='menu' />
                     <Typography variant='h6' className={classes.title}>

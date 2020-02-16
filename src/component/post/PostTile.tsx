@@ -3,7 +3,6 @@ import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
-import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Avatar from '@material-ui/core/Avatar';
@@ -25,7 +24,7 @@ type Props = {
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         root: {
-            maxWidth: 345
+     
         },
         media: {
             height: 0,
@@ -73,7 +72,6 @@ export const PostTile: React.FC<Props> = props => {
                         title='高橋順平'
                         // subheader={props.post.createdAt}
                     />
-                    <CardMedia className={classes.media} image='/static/images/cards/paella.jpg' title='Paella dish' />
                     <CardContent>
                         <Typography variant='body2' color='textSecondary' component='p'>
                             {props.post.content}

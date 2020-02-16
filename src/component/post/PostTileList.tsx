@@ -7,25 +7,13 @@ type Props = {
     posts: Post[];
 }
 
-export default class PostTileList extends React.Component<Props> {
-    public constructor(props: Props) {
-        super(props);
-    }
-
-    private renderPostTileList = () => {
-        return this.props.posts.map(post => (
-            <PostTile key={post.id} post={post} />
-        ));
-    };
-
-    public render() {
-        return (
-            <div>
-                <h2>投稿一覧</h2>
-                <Grid container direction='row'>
-                    {this.renderPostTileList()}
-                </Grid>
-            </div>
-        );
-    }
+export const PostTileList: React.FC<Props> = (props) => {
+    return (
+        <div>
+            <h2>新着投稿</h2>
+            <Grid container direction='row'>
+                {props.posts.map(post => (<PostTile key={post.id} post={post} />))}
+            </Grid>
+        </div>
+    );
 }

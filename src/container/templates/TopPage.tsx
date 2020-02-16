@@ -6,7 +6,7 @@ import { Container } from '@material-ui/core';
 import Post from '../../define/model/post/Post';
 import GetPostsTaskFactory from '../../lib/task/posts/GetPostsTask';
 import CreatePostTaskFactory from '../../lib/task/posts/CreatePostTask';
-import PostTileList from '../../component/post/PostTileList';
+import { PostTileList } from '../../component/post/PostTileList';
 import CreateUserTaskFactory from '../../lib/task/users/CreateUserTask';
 
 type Props = RouteComponentProps<{}>;
@@ -15,8 +15,6 @@ type State = {
     posts: Post[];
     title: string;
     content: string;
-    email: string;
-    password: string;
 };
 
 export default class TopPage extends React.Component<Props, State> {
@@ -26,8 +24,6 @@ export default class TopPage extends React.Component<Props, State> {
             posts: [],
             title: '',
             content: '',
-            email: '',
-            password: ''
         };
     }
 
@@ -59,31 +55,7 @@ export default class TopPage extends React.Component<Props, State> {
             <div>
                 <Container>
                     <h1>理系就活口コミサイト</h1>
-                    <TextField
-                        id='standard-basic'
-                        label='メールアドレス'
-                        onChange={event => this.setState({ email: event.target.value })}
-                        value={this.state.email}
-                    />
-                    <TextField
-                        id='standard-basic'
-                        label='パスワード'
-                        onChange={event => this.setState({ password: event.target.value })}
-                        value={this.state.password}
-                    />
-                    <Button
-                        color='primary'
-                        variant='outlined'
-                        onClick={() => this.createUser('test3@gmail.com', 'testtest')}
-                    >
-                        サインアップ
-                    </Button>
-                    <TextField
-                        id='standard-basic'
-                        label='タイトル'
-                        onChange={event => this.setState({ title: event.target.value })}
-                        value={this.state.title}
-                    />
+                    <PostTileList posts={this.state.posts} />
                     <TextField
                         id='standard-basic'
                         label='内容'
@@ -97,7 +69,6 @@ export default class TopPage extends React.Component<Props, State> {
                     >
                         送信
                     </Button>
-                    <PostTileList posts={this.state.posts} />
                 </Container>
             </div>
         );
